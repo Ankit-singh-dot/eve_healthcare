@@ -10,6 +10,15 @@ You can instantly test the API endpoints without setting up the project locally.
 
  **Swagger API Documentation:** [https://eve-healthcare-wgdx.onrender.com/api-docs](https://eve-healthcare-wgdx.onrender.com/api-docs)
 
+
+ you can test the live api in the postman :- https://eve-healthcare-wgdx.onrender.com/auth/login
+    {
+    "email":"test1@gmail.com",
+    "password":"test123@gmail.com"
+    }
+
+
+
 ### How to Test Protected Endpoints via Swagger
 1. **Signup/Login:** Hit the `POST /auth/login` (or signup) endpoint with an email and password to generate a JWT token.
 2. **Copy the Token:** Copy the `token` string from the JSON response.
