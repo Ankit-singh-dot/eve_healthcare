@@ -2,6 +2,21 @@
 
 This is a backend service for diagnostic test bookings and simulated payments, built with Express.js, TypeScript, and Prisma ORM.
 
+##  Live Demo (Deployed)
+You can instantly test the API endpoints without setting up the project locally. The backend is fully deployed and optimized:
+- **API Hosting:** Render.com (Dockerized Environment)
+- **Database:** Neon DB (Serverless PostgreSQL)
+- **Cache:** Upstash (Serverless Redis TLS)
+
+ **Swagger API Documentation:** [https://eve-healthcare-wgdx.onrender.com/api-docs](https://eve-healthcare-wgdx.onrender.com/api-docs)
+
+### How to Test Protected Endpoints via Swagger
+1. **Signup/Login:** Hit the `POST /auth/login` (or signup) endpoint with an email and password to generate a JWT token.
+2. **Copy the Token:** Copy the `token` string from the JSON response.
+3. **Authorize:** Scroll to the top of the Swagger UI page, click the green **"Authorize"** button.
+4. **Enter Token:** Type `Bearer <your_copied_token>` and click "Authorize". 
+5. **Test Everything:** You can now test all protected routes (like `POST /bookings`, `POST /api/centres`, etc.) successfully!
+
 ## Technologies Used
 - Node.js & Express.js
 - TypeScript
@@ -56,8 +71,9 @@ npm run dev
 ```
 
 ## API Documentation
-Swagger documentation is available at:
-`http://localhost:3000/api-docs`
+Swagger interactive documentation is available at:
+- **Live:** `https://eve-healthcare-wgdx.onrender.com/api-docs`
+- **Local:** `http://localhost:3000/api-docs`
 
 ## Features & Edge Cases Handled
 1. **Authentication**: JWT-based auth with secure password hashing.
