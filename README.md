@@ -17,6 +17,10 @@ You can instantly test the API endpoints without setting up the project locally.
 4. **Enter Token:** Type `Bearer <your_copied_token>` and click "Authorize". 
 5. **Test Everything:** You can now test all protected routes (like `POST /bookings`, `POST /api/centres`, etc.) successfully!
 
+proof of work :- i.e backend is working ( hosted on free tier might be due to no request it will slow down or cold-start problme)
+<img width="752" height="900" alt="Screenshot 2026-10-02 at 3 47 00 PM" src="https://github.com/user-attachments/assets/328a871f-7dd7-4e38-acf7-caf266872a89" />
+
+
 ## Technologies Used
 - Node.js & Express.js
 - TypeScript
