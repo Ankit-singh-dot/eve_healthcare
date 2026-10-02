@@ -1,0 +1,191 @@
+openapi: 3.0.0
+info:
+  title: EVE Healthcare API
+  version: 1.0.0
+  description: Backend service for diagnostic test bookings and simulated payments.
+servers:
+  - url: http://localhost:3000
+paths:
+  /auth/signup:
+    post:
+      summary: User signup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+                name:
+                  type: string
+      responses:
+        '201':
+          description: Created
+  /auth/login:
+    post:
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Success
+  /api/centres:
+    get:
+      summary: Get all centres
+      responses:
+        '200':
+          description: Success
+    post:
+      summary: Create a centre
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                location:
+                  type: string
+      responses:
+        '201':
+          description: Created
+  /api/tests:
+    get:
+      summary: Get all tests
+      responses:
+        '200':
+          description: Success
+    post:
+      summary: Create a test
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Created
+  /api/centres/{centreId}/tests:
+    post:
+      summary: Add a test to a centre
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: centreId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                testId:
+                  type: string
+                price:
+                  type: number
+      responses:
+        '201':
+          description: Created
+  /bookings:
+    get:
+      summary: Get bookings for the authenticated user
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+    post:
+      summary: Create a booking
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                testId:
+                  type: string
+                centreId:
+                  type: string
+                appointmentDate:
+                  type: string
+                  format: date-time
+      responses:
+        '201':
+          description: Created
+  /payments:
+    post:
+      summary: Process a simulated payment
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookingId:
+                  type: string
+                amount:
+                  type: number
+      responses:
+        '200':
+          description: Success
+  /payments/webhook:
+    post:
+      summary: Payment webhook
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                paymentId:
+                  type: string
+                bookingId:
+                  type: string
+                status:
+                  type: string
+                  enum: [SUCCESS, FAILED]
+      responses:
+        '200':
+          description: Success
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
