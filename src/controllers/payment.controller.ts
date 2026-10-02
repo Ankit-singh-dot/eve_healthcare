@@ -27,8 +27,7 @@ export const handleWebhook = async (req: Request, res: Response) => {
     if (error.message === 'Booking not found') {
       return res.status(404).json({ error: error.message });
     }
-    // Return 200 even on some errors to prevent webhook provider from retrying indefinitely if it's our fault
-    // But for a missing booking, 404 is appropriate.
+    
     res.status(500).json({ error: 'Internal server error' });
   }
 };

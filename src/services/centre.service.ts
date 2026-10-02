@@ -1,9 +1,9 @@
 import prisma from '../utils/prisma.js';
 import redisClient from "../utils/redis.js"; 
 export const createCentre = async (data: { name: string; location: string }) => {
-  return prisma.diagnosticCentre.create({
-    data
-  });
+  const centre = await prisma.diagnosticCentre.create({ data });
+  await redisClient.flushDb();
+  return centre;
 };
 
 export const getCentres = async (page: number = 1, limit: number = 10) => {

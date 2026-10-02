@@ -4,15 +4,14 @@ import * as centreService from '../services/centre.service.js';
 import redisClient from '../utils/redis.js';
 import logger from '../config/logger.js';
 
-export const createCentre = async (data: {
-  name: string;
-  location: string;
-}) => {
-  const centre = await prisma.diagnosticCentre.create({ data });
-
-  await redisClient.flushDb();
-
-  return centre;
+export const createCentre = async (req: Request, res: Response) => {
+  try {
+    const centre = await centreService.createCentre(req.body);
+    res.status(201).json(centre);
+  } catch (error: any) {
+    logger.error('Error creating centre', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 };
 
 

@@ -2,7 +2,7 @@ import prisma from '../utils/prisma.js';
 import { BookingStatus } from '@prisma/client';
 
 export const createBooking = async (userId: string, data: { testId: string; centreId: string; appointmentDate: string }) => {
-  // Check if test is available at the centre and get price
+
   const centreTest = await prisma.centreTest.findUnique({
     where: {
       centreId_testId: {
